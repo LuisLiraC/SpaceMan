@@ -261,6 +261,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: platform-l
       objectReference: {fileID: 0}
+    - target: {fileID: 902261730331820002, guid: d62fec6571cc7604aa5bc521ad15cd46, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 902261730331820003, guid: d62fec6571cc7604aa5bc521ad15cd46, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 902261730331820003, guid: d62fec6571cc7604aa5bc521ad15cd46, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 902261730331820003, guid: d62fec6571cc7604aa5bc521ad15cd46, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 908625173
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d62fec6571cc7604aa5bc521ad15cd46, type: 3}
 --- !u!1001 &1625237151
@@ -270,9 +286,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5012321920488616289, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -5012321920488616289, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
+      propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8413927596187953416, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8413927596187953416, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
       propertyPath: m_SortingOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8413927596187953416, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1518334325
       objectReference: {fileID: 0}
     - target: {fileID: 8413927596187953417, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
       propertyPath: m_RootOrder
@@ -280,11 +312,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8413927596187953417, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.300412
+      value: -6.77
       objectReference: {fileID: 0}
     - target: {fileID: 8413927596187953417, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6149437
+      value: 2.08
       objectReference: {fileID: 0}
     - target: {fileID: 8413927596187953417, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
       propertyPath: m_LocalPosition.z
@@ -322,6 +354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8413927596187953422, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c0874e53e6c72d41ad980962b97c800, type: 3}
 --- !u!1 &1654426143 stripped
@@ -342,3 +378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 6
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256
+  groundDistanceToJump: 1.5

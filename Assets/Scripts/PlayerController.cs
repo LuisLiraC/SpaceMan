@@ -4,26 +4,62 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Player movement variables
+    Rigidbody2D rigidBody;
+    Animator animator;
+    const string STATE_ALIVE = "isAlive";
+    const string STATE_ON_THE_GROUND = "isOnTheGround";
+
     [SerializeField]
-    private float jumpForce = 6f;
+    float jumpForce = 6f;
 
-    private Rigidbody2D rigidBody;
+    [SerializeField]
+    LayerMask groundMask;
 
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    float groundDistanceToJump = 1.5f;
+
+    void Awake()
     {
-        
+        rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    void Start()
+    {
+        animator.SetBool(STATE_ALIVE, true);
+        animator.SetBool(STATE_ON_THE_GROUND, true);
+    }
+
     void Update()
     {
-        
+        animator.SetBool(STATE_ON_THE_GROUND, IsTouchingTheGround());
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            if (IsTouchingTheGround())
+            {
+                Jump();
+            }
+        }
+
+        Debug.DrawRay(this.transform.position, Vector2.down * groundDistanceToJump, Color.red);
     }
 
     void Jump()
     {
-        
+        rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
+    
+
+    bool IsTouchingTheGround()
+    {
+        if (Physics2D.Raycast(this.transform.position, Vector2.down, groundDistanceToJump, groundMask))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
