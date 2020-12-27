@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     float jumpForce = 6f;
 
     [SerializeField]
+    float runningSpeed = 2f;
+
+    [SerializeField]
     LayerMask groundMask;
 
     [SerializeField]
@@ -45,6 +48,11 @@ public class PlayerController : MonoBehaviour
         Debug.DrawRay(this.transform.position, Vector2.down * groundDistanceToJump, Color.red);
     }
 
+    void FixedUpdate()
+    {
+        Move();
+    }
+
     void Jump()
     {
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -60,6 +68,19 @@ public class PlayerController : MonoBehaviour
         else
         {
             return false;
+        }
+    }
+
+    void Move()
+    {
+        rigidBody.velocity = new Vector2(Input.GetAxis("Horizontal") * runningSpeed, rigidBody.velocity.y);
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+        }
+        if (Input.GetAxis("Horizontal") > 0)
+        {
+            GetComponent<SpriteRenderer>().flipX = false;
         }
     }
 }
