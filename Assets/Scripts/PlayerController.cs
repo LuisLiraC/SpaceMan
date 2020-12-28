@@ -6,14 +6,16 @@ public class PlayerController : MonoBehaviour
 {
     Rigidbody2D rigidBody;
     Animator animator;
+    Vector3 startPosition;
+
     const string STATE_ALIVE = "isAlive";
     const string STATE_ON_THE_GROUND = "isOnTheGround";
 
     [SerializeField]
-    float jumpForce = 6f;
+    float jumpForce = 7f;
 
     [SerializeField]
-    float runningSpeed = 2f;
+    float runningSpeed = 4f;
 
     [SerializeField]
     LayerMask groundMask;
@@ -25,19 +27,36 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        startPosition = transform.position;
     }
 
     void Start()
     {
+        rigidBody.gravityScale = 0;
+    }
+
+    public void StartGame()
+    {
+        
         animator.SetBool(STATE_ALIVE, true);
-        animator.SetBool(STATE_ON_THE_GROUND, true);
+        animator.SetBool(STATE_ON_THE_GROUND, false);
+        StartCoroutine(RestartPosition());
+    }
+    IEnumerator RestartPosition()
+    {
+        yield return new WaitForSeconds(0.3f);
+        transform.position = startPosition;
+        rigidBody.velocity = Vector2.zero;
+        rigidBody.gravityScale = 1;
+        GameObject mainCamera = GameObject.Find("Main Camera");
+        mainCamera.GetComponent<CameraFollow>().ResetCameraPosition();
     }
 
     void Update()
     {
         animator.SetBool(STATE_ON_THE_GROUND, IsTouchingTheGround());
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space) && GameManager.sharedInstance.currentGameState == GameState.InGame)
         {
             if (IsTouchingTheGround())
             {
@@ -45,12 +64,15 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Debug.DrawRay(this.transform.position, Vector2.down * groundDistanceToJump, Color.red);
+        //Debug.DrawRay(this.transform.position, Vector2.down * groundDistanceToJump, Color.red);
     }
 
     void FixedUpdate()
     {
-        Move();
+        if (GameManager.sharedInstance.currentGameState == GameState.InGame)
+        {
+            Move();
+        }
     }
 
     void Jump()
@@ -82,5 +104,11 @@ public class PlayerController : MonoBehaviour
         {
             GetComponent<SpriteRenderer>().flipX = false;
         }
+    }
+
+    public void Die()
+    {
+        animator.SetBool(STATE_ALIVE, false);
+        GameManager.sharedInstance.GameOver();
     }
 }

@@ -34,7 +34,7 @@ TextureImporter:
     second: ball-y
   - first:
       213: -6723461406285876323
-    second: jump-1
+    second: idle-1
   - first:
       213: -6168345510081062624
     second: jump-2
@@ -439,7 +439,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: jump-1
+      name: idle-1
       rect:
         serializedVersion: 2
         x: 81
@@ -611,7 +611,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 85
-        y: 1634
+        y: 1631
         width: 202
         height: 284
       alignment: 0
